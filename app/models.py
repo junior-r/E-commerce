@@ -1,3 +1,4 @@
+from distutils.command.upload import upload
 from django.db import models
 
 # Create your models here.
@@ -14,6 +15,7 @@ class Producto(models.Model):
     descripcion = models.TextField()
     marca = models.ForeignKey(Marca, on_delete=models.PROTECT)
     fecha_fabricacion = models.DateField()
+    imagen = models.ImageField(upload_to='productos', null=True)
 
     def __str__(self):
         return self.nombre
