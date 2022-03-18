@@ -1,6 +1,7 @@
 {% extends 'app/base.html' %}
 {% load static %}
 {% block title %} Inicio {% endblock %}
+{% block styles %} <link rel="stylesheet" href="{% static 'app/css/home.css' %}"> {% endblock %}
 {% block content %}
 <h1 class="mt-5 mb-5 text-center">Bienvenido a la mejor Tienda de Ropa</h1>
 
@@ -43,7 +44,7 @@
   </button>
 </div>
 
-<div class="description mt-5 text-light">
+<div class="description mt-5 text-dark">
   <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Error ratione similique expedita, ex hic voluptates.</p>
 </div>
 
