@@ -70,7 +70,7 @@
     padding: 0.5rem 1rem;
     border-radius: 10px;
     border: none;
-    outline: none;
+    outline: 1px solid #faebd7;
 }
 
 .form-mail button.btn-light {

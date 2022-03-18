@@ -1,5 +1,14 @@
 .card-group {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card-group .card {
+    box-shadow: none;
+    transition: all 0.3s ease;
+}
+
+.card-group .card:hover {
+    box-shadow: 2px 2px 15px 2px #000;
 }
 
 .card-group .card .card-img-top {

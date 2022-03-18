@@ -1,11 +1,13 @@
 body {
-    background: linear-gradient(to top, #03001e, #7303c0, #ec38bc, #fdeff9);
-    background-repeat: no-repeat;
     min-height: 100vh;
 }
 
 .container {
     min-height: 100vh;
+}
+
+.navbar {
+    background-color: #bbf2ff;
 }
 
 .footer {
