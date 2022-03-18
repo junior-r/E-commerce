@@ -4,11 +4,13 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib import messages
+from .models import Producto
 
 # Create your views here.
 
 
 def home(request):
+    
     return render(request, 'app/home.html')
 
 
@@ -36,4 +38,8 @@ def contacto(request):
 
 
 def productos(request):
-    return render(request, 'app/productos.html')
+    productos = Producto.objects.all()
+    data = {
+        'productos': productos
+    }
+    return render(request, 'app/productos.html', data)
