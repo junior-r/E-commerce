@@ -7,7 +7,7 @@
 {% endblock %}
 {% block content %}
 <h1 class="mt-5 mb-5 text-center">Contáctanos!</h1>
-
+<hr>
 <div class="redes d-flex gap-4 justify-content-center mb-5">
     <div class="red whtsp">
         <a href="https://api.whatsapp.com/send?phone=+58 4129032865">
@@ -44,32 +44,40 @@
 </div>
 
 <div class="d-grid justify-content-center w-100">
-    <h2 class="mb-4"><span class="icon-gmail"></span> Envíanos un Mail</h2>
-    <form method="POST" action="{% url 'contacto' %}" class="form-mail d-flex flex-column">
-        {% csrf_token %}
+    <div class="card">
+        <div class="card-body">
+            <h2 class="mb-4"><span class="icon-gmail"></span> Envíanos un Mail</h2>
+        <form method="POST" action="{% url 'contacto' %}" class="form-mail">
+            {% csrf_token %}
 
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
 
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label text-dark">Dirección Email</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" required placeholder="example@example.com" name="dir_email">
+            <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label text-dark">Dirección Email</label>
+            <input type="email" class="form-control" id="exampleFormControlInput1" required placeholder="example@example.com" name="dir_email">
+            </div>
+            <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label text-dark">Asunto</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" required placeholder="Título del Correo" name="asunto" minlength="2" maxlength="50">
+            </div>
+            <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label text-dark">Mensaje</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" required placeholder="Escribe algo..." rows="3" name="subject" minlength="2"></textarea>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-center gap-2">
+                <button class="btn btn-primary" type="submit">Enviar</button>
+                <button class="btn btn-secondary" type="reset">Cancelar</button>
+            </div>
+        </form>
         </div>
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label text-dark">Asunto</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" required placeholder="Título del Correo" name="asunto" minlength="2" maxlength="50">
-        </div>
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label text-dark">Mensaje</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" required placeholder="Escribe algo..." rows="3" name="subject" minlength="2"></textarea>
-        </div>
-        <button class="btn btn-light" type="submit">Enviar</button>
-    </form>
+    </div>
 </div>
 
 {% endblock %}

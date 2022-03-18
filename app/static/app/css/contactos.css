@@ -72,19 +72,3 @@
     border: none;
     outline: 1px solid #faebd7;
 }
-
-.form-mail button.btn-light {
-    padding: 0.3rem 1.5rem;
-    border: none;
-    outline: none;
-    align-self: center;
-    width: 50%;
-    text-transform: uppercase;
-    font-weight: 700;
-    transition: all ease 0.3s;
-}
-
-.form-mail button.btn-light:hover {
-    background-color: #25d366;
-    width: 70%;
-}

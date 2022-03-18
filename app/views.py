@@ -30,10 +30,11 @@ def contacto(request):
         )
 
         email.fail_silently = False
-        email.send()
-
-        messages.success(request, 'Tu Correo ha sido enviado con exito!.')
-        return render(request, 'app/contacto.html')
+        try:
+            email.send()
+            messages.success(request, 'Tu Correo ha sido enviado con exito!.')
+        except:
+            messages.error(request, 'Ha ocurrido un error al enviar el Email')
     return render(request, 'app/contacto.html')
 
 
