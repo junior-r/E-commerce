@@ -1,0 +1,8 @@
+.card-group {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.card-group .card .card-img-top {
+    max-height: 240px;
+    height: 100%;
+}

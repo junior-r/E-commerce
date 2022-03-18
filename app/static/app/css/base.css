@@ -1,0 +1,35 @@
+body {
+    background: linear-gradient(to top, #03001e, #7303c0, #ec38bc, #fdeff9);
+    background-repeat: no-repeat;
+    min-height: 100vh;
+}
+
+.container {
+    min-height: 100vh;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.footer .sections {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    align-items: center;
+    padding: 1.5rem 1rem;
+}
+
+.footer .menu {
+    display: flex;
+    list-style: none;
+    margin-bottom: 0;
+}
+
+.footer .menu .nav-item a {
+    text-decoration: none;
+    color: #707071;
+}

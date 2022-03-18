@@ -1,0 +1,63 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %} Productos {% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'app/css/productos.css' %}">
+{% endblock %}
+{% block content %}
+<h1 class="mt-5 mb-5 text-center">Nuestros Productos</h1>
+
+<div class="card-group d-grid gap-5 mb-4">
+  <div class="card">
+    <img src="{% static 'app/imagenes/slider/1.jpg' %}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Precio: $5.99</small>
+    </div>
+  </div>
+  <div class="card">
+    <img src="{% static 'app/imagenes/slider/2.jpg' %}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Precio: $5.99</small>
+    </div>
+  </div>
+  <div class="card">
+    <img src="{% static 'app/imagenes/slider/3.jpg' %}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Precio: $5.99</small>
+    </div>
+  </div>
+  <div class="card">
+    <img src="{% static 'app/imagenes/slider/3.jpg' %}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Precio: $5.99</small>
+    </div>
+  </div>
+  <div class="card">
+    <img src="{% static 'app/imagenes/slider/3.jpg' %}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Precio: $5.99</small>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

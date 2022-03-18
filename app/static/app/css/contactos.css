@@ -1,0 +1,90 @@
+.redes .whtsp .button {
+    background-color: #fff;
+    transition: all ease 0.3s;
+}
+
+.redes .whtsp .button:hover {
+    background-color: #25d366;
+}
+
+.redes .whtsp .button:hover .icon-whatsapp:before {
+    color: #fff !important;
+    border-radius: 50%;
+}
+
+.redes .fcbo .button {
+    transition: all ease 0.3s;
+    background-color: #fff;
+}
+
+.redes .fcbo .button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.redes .fcbo .button:hover .icon-facebook:before {
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.redes .tiktok .button {
+    transition: all ease 0.3s;
+    background-color: #fff;
+    color: #000;
+}
+
+.redes .tiktok .button:hover {
+    color: #FFF;
+    background-color: #000;
+}
+
+.redes .instg .button {
+    transition: all ease 0.3s;
+    background-color: #fff;
+}
+
+.redes .instg .button:hover {
+    color: #FFF;
+    background: linear-gradient(to bottom left,  rgb(64, 93, 230), rgb(88, 81, 216), rgb(131, 58, 180), rgb(193, 53, 132), rgb(225, 48, 108), rgb(253, 29, 29), rgb(245, 96, 64), rgb(247, 119, 55), rgb(252, 175, 69), rgb(255, 220, 128));
+}
+
+.icon-instagram:before {
+    transition: all ease 0.3s;
+}
+
+.redes .instg .button:hover .icon-instagram:before {
+    color: #fff !important;
+}
+
+.redes .red {
+    font-size: 1.5rem;
+}
+
+.icon-gmail {
+    background-color: #fff;
+    padding: 0.5rem;
+    border-radius: 50%;
+}
+
+.redes .red .button {
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+
+.form-mail button.btn-light {
+    padding: 0.3rem 1.5rem;
+    border: none;
+    outline: none;
+    align-self: center;
+    width: 50%;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: all ease 0.3s;
+}
+
+.form-mail button.btn-light:hover {
+    background-color: #25d366;
+    width: 70%;
+}

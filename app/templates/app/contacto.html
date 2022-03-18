@@ -1,0 +1,75 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %} Contactos {% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'app/css/contactos.css' %}">
+<link rel="stylesheet" href="{% static 'app/imagenes/iconos-contactos/style.css' %}">
+{% endblock %}
+{% block content %}
+<h1 class="mt-5 mb-5 text-center">Contáctanos!</h1>
+
+<div class="redes d-flex gap-4 justify-content-center mb-5">
+    <div class="red whtsp">
+        <a href="https://api.whatsapp.com/send?phone=+58 4129032865">
+            <button type="button" class="button">
+                <span class="icon-whatsapp"></span>
+                Whatsapp
+            </button>
+        </a>
+    </div>
+    <div class="red fcbo">
+        <a href="#">
+            <button type="button" class="button">
+                <span class="icon-facebook"></span>
+                Facebook
+            </button>
+        </a>
+    </div>
+    <div class="red tiktok">
+        <a href="#">
+            <button type="button" class="button">
+                <span class="icon-tiktok"></span>
+                Tik Tok
+            </button>
+        </a>
+    </div>
+    <div class="red instg">
+        <a href="#">
+            <button type="button" class="button">
+                <span class="icon-instagram"></span>
+                Instagram
+            </button>
+        </a>
+    </div>
+</div>
+
+<div class="d-grid justify-content-center w-100">
+    <h2 class="mb-4"><span class="icon-gmail"></span> Envíanos un Mail</h2>
+    <form method="POST" action="{% url 'contacto' %}" class="form-mail d-flex flex-column">
+        {% csrf_token %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label text-light">Dirección Email</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" required placeholder="example@example.com" name="dir_email">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label text-light">Asunto</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" required placeholder="Título del Correo" name="asunto" minlength="2" maxlength="50">
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label text-light">Mensaje</label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" required placeholder="Escribe algo..." rows="3" name="subject" minlength="2"></textarea>
+        </div>
+        <button class="btn btn-light" type="submit">Enviar</button>
+    </form>
+</div>
+
+{% endblock %}
