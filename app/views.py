@@ -5,6 +5,8 @@ from django.template.loader import render_to_string
 from django.conf import settings
 from django.contrib import messages
 from .models import Producto
+from django.core.paginator import Paginator
+from django.http import Http404
 
 # Create your views here.
 
@@ -40,7 +42,15 @@ def contacto(request):
 
 def productos(request):
     productos = Producto.objects.all()
+    page = request.GET.get('page', 1)
+    try:
+        paginator = Paginator(productos, 16)
+        productos = paginator.page(page)
+    except:
+        raise Http404
+
     data = {
-        'productos': productos
+        'entity': productos,
+        'paginator': paginator
     }
     return render(request, 'app/productos.html', data)
