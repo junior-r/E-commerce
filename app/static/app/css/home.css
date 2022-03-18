@@ -1,0 +1,9 @@
+.description {
+    min-height: 100vh;
+    height: 100%;
+
+}
+
+.description p {
+    font-size: 1.5rem;
+}

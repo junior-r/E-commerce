@@ -66,6 +66,14 @@
     border-radius: 50%;
 }
 
+.icon-location2 {
+    padding: 0.5rem;
+}
+
+.icon-location2:before {
+    color: #ff0000;
+}
+
 .redes .red .button {
     padding: 0.5rem 1rem;
     border-radius: 10px;
