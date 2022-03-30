@@ -8,6 +8,8 @@ from django.core.paginator import Paginator
 from django.http import Http404
 from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -15,6 +17,15 @@ from django.contrib.auth import authenticate, login
 def home(request):
     
     return render(request, 'app/home.html')
+
+
+@login_required
+def profile(request, username):
+    user = User.objects.get(username=username)
+    data = {
+        'user': user
+    }
+    return render(request, 'app/profile.html', data)
 
 
 def registro(request):

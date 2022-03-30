@@ -21,8 +21,9 @@
         <h5 class="card-title">{{ p.nombre | title }}</h5>
         <p class="card-text">{{ p.descripcion }}</p>
       </div>
-      <div class="card-footer">
+      <div class="card-footer d-flex justify-content-between align-items-center">
         <small class="text-muted">$ {{ p.precio | intcomma }}</small>
+        <button type="button" class="btn btn-sm btn-primary">Agregar al Carrito</button>
       </div>
     </div>
   {% endfor %}
