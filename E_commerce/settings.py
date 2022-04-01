@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
-    'CarritoApp.apps.CarritoappConfig',
     'colorfield',
     'django.contrib.humanize',
     'crispy_forms',
