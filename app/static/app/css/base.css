@@ -45,3 +45,9 @@ body {
     text-decoration: none;
     color: #707071;
 }
+
+@media screen and (max-width: 600px) {
+    .footer .menu {
+        display: none;
+    }
+}

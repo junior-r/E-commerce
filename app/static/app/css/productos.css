@@ -15,9 +15,23 @@
     max-height: 240px;
     height: 100%;
     object-fit: fill;
-    transition: all 0.3s ease;
+    object-fit: contain;
 }
 
-.card-group .card:hover .card-img-top {
-    object-fit: contain;
+@media screen and (max-width: 1200px) {
+    .card-group {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (max-width: 995px) {
+    .card-group {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 535px) {
+    .card-group {
+        grid-template-columns: 1fr;
+    }
 }
