@@ -14,10 +14,17 @@ body {
 .icon-cart1:before {
     font-size: 1.5rem;
     color: #626262;
-    /* background-color: #000;
-    padding: 0.5rem;
-    border-radius: 50%; */
     text-shadow: 1px 1px 5px #000;
+}
+
+.contador_carrito {
+    margin-left: 1rem;
+    color: #000;
+}
+
+.btn-add a,
+.btn-rest a {
+    background-color: #626262;
 }
 
 .footer {
