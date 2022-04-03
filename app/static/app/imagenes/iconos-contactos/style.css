@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?enx3qd');
-  src:  url('fonts/icomoon.eot?enx3qd#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?enx3qd') format('truetype'),
-    url('fonts/icomoon.woff?enx3qd') format('woff'),
-    url('fonts/icomoon.svg?enx3qd#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?a27r7s');
+  src:  url('fonts/icomoon.eot?a27r7s#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?a27r7s') format('truetype'),
+    url('fonts/icomoon.woff?a27r7s') format('woff'),
+    url('fonts/icomoon.svg?a27r7s#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -28,21 +28,14 @@
 .icon-cart1:before {
   content: "\e906";
 }
-.icon-cart:before {
-  content: "\e93a";
+.icon-plus:before {
+  content: "\ea0a";
 }
-.icon-location2:before {
-  content: "\e948";
+.icon-minus:before {
+  content: "\ea0b";
 }
 .icon-copyright:before {
   content: "\e905";
-}
-.icon-tiktok:before {
-  content: "\e900";
-}
-.icon-instagram:before {
-  content: "\e901";
-  color: #e4405f;
 }
 .icon-gmail:before {
   content: "\e904";

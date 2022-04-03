@@ -8,14 +8,43 @@
 }
 
 .card-group .card:hover {
-    box-shadow: 2px 2px 15px 2px #000;
+    box-shadow: 2px 2px 15px 2px rgba(0,0,0,0.5);
 }
 
 .card-group .card .card-img-top {
     max-height: 240px;
     height: 100%;
-    object-fit: fill;
     object-fit: contain;
+}
+
+/* imagen de la vista view_producto */
+.card_producto .card-img-top {
+    max-height: 500px;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    animation: rotateY 3s infinite;
+    width: 50%;
+    margin-inline: auto;
+    box-shadow: 1px 1px 15px 5px rgba(0,0,0,0.5);
+}
+
+@keyframes rotateY {
+    0% {
+        transform: none;
+    }
+
+    33% {
+        transform: rotateY(-25deg);
+    }
+
+    66% {
+        transform: rotateY(25deg);
+    }
+
+    99% {
+        transform: rotateY(0deg);
+    }
 }
 
 @media screen and (max-width: 1200px) {

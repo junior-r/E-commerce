@@ -86,3 +86,10 @@ def productos(request):
         'paginator': paginator
     }
     return render(request, 'app/productos.html', data)
+
+def view_producto(request, nombre, id):
+    producto = Producto.objects.get(id=id, nombre=nombre)
+    data = {
+        'producto': producto
+    }
+    return render(request, 'app/view_producto.html', data)

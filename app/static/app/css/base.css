@@ -1,6 +1,6 @@
 body {
     min-height: 100vh;
-    background-color: #eee !important;
+    background: linear-gradient(to bottom, #59c173, #a17fe0, #5d26c1) !important;
 }
 
 .container {
@@ -13,13 +13,11 @@ body {
 
 .icon-cart1:before {
     font-size: 1.5rem;
-    color: #626262;
-    text-shadow: 1px 1px 5px #000;
+    color: #fff;
 }
 
 .contador_carrito {
     margin-left: 1rem;
-    color: #000;
 }
 
 .btn-add a,
@@ -37,7 +35,6 @@ body {
 .footer .sections {
     display: flex;
     justify-content: space-between;
-    background-color: #f8f9fa;
     align-items: center;
     padding: 1.5rem 1rem;
 }
@@ -50,7 +47,6 @@ body {
 
 .footer .menu .nav-item a {
     text-decoration: none;
-    color: #707071;
 }
 
 @media screen and (max-width: 600px) {

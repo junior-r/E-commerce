@@ -1,0 +1,23 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} Producto - {{ producto.nombre | capfirst }} {% endblock title %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'app/css/productos.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="card mb-3 mt-5 card_producto border border-secondary border-3" style="perspective: 1000px;">
+        {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" class="card-img-top" alt="imagen del producto {{ producto.nombre }}">
+        {% else %}
+            <img src="{% static 'app/imagenes/Productos/placeholder.jpg' %}" class="card-img-top" alt="imagen producto {{ producto.nombre }}">
+        {% endif %}
+        <div class="card-body text-white bg-dark">
+            <small class="text-muted">{{ producto.marca | capfirst }}</small>
+            <h5 class="card-title">{{ producto.nombre }}</h5>
+            <p class="card-text">{{ producto.descripcion }}</p>
+            <p class="card-text"><small class="text-white fw-bold fs-5">$ {{ producto.precio | intcomma }}</small></p>
+            <button type="button" class="btn btn-sm btn-primary">Agregar al Carrito</button>
+        </div>
+    </div>
+{% endblock content %}
