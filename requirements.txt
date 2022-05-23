@@ -2,3 +2,5 @@ django == 4.0.2
 pillow
 django-crispy-forms
 django-admin-interface
+django-naomi
+six

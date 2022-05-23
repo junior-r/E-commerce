@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*wjb*=ep95$04ip9))u(s2a$nn3!w(vn&c&2#p^1%@qicx79t5'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'crispy_forms',
 ]
+
+INSTALLED_APPS += ('naomi',)
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
@@ -135,12 +137,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.googlemail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'junior31064049@gmail.com'
 EMAIL_HOST_PASSWORD = 'ssuehzxebnxxjyoy'
 EMAIL_USE_TLS = True
+
+if DEBUG:
+    EMAIL_BACKEND = "naomi.mail.backends.naomi.NaomiBackend"
+    EMAIL_FILE_PATH = "D:/Users/LENOVO/Documents/Programación/Mis Proyectos/E-commerce/tmp"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

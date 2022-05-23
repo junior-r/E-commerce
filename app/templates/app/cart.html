@@ -1,0 +1,94 @@
+{% extends 'app/home.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} Carrito {% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{% static 'app/css/productos.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="d-grid my-5">
+        <div class="row">
+            <div class="content">
+                {% if cart %}
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Monto total</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for k, v in cart.items %}
+                                <tr>
+                                    <th scope="row">{{ v.producto_id }}</th>
+                                    <td><a href="{% url 'view_producto' v.nombre v.producto_id %}" class="text-decoration-none">{{ v.nombre }}</a></td>
+                                    <td>{{ v.precio }}</td>
+                                    <td>{{ v.cantidad_vender }}</td>
+                                    <td>{{ v.monto_total }}</td>
+                                    <td>
+                                        <a href="{% url 'incr_prd_cart' v.nombre v.producto_id %}" class="icon-plus text-decoration-none px-1 btn text-primary"></a>
+                                        <a href="{% url 'sub_prd_cart' v.nombre v.producto_id %}" class="icon-minus text-decoration-none px-1 btn text-primary"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>{{ total_cart }}</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                {% else %}
+                    <h1 class="title">No hay productos para comprar!</h1>
+                    <a href="{% url 'productos' %}" class="text text-decoration-none">Ir a productos!</a>
+                {% endif %}
+            </div>
+            {% if cart %}
+                <div class="action d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Terminar pedido <span class="icon-checkmark"></span></button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">!Terminar Pedido¡</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-3">
+                        {% csrf_token %}
+                        <div class="email">
+                            <label for="email">Correo electrónico:</label>
+                            <input type="email" class="form-control" id="email" name="email_user" placeholder="example@gmail.com">
+                        </div>
+                        <div class="asunto">
+                            <label for="asunto">Asunto:</label>
+                            <input type="text" class="form-control" id="asunto" name="asunto" placeholder="Escribe un breve mensaje!" maxlength="100">
+                        </div>
+                        <div class="buttons d-flex justify-content-between">
+                            <button class="btn btn-outline-danger px-3" type="reset">Limpiar</button>
+                            <button class="btn btn-outline-success px-4" type="submit">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

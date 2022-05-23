@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <style>
+        .number {
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .title {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .text {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .resalt {
+            color: #0b5ed8;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        thead {
+            border-bottom: 3px solid #000;
+        }
+        
+        tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.075);
+        }
+
+        th, td {
+            padding: 1.25rem;
+        }
+
+        tfoot {
+            border-top: 3px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Pedido por parte del usuario: {{ email_user }}</h1>
+    <p class="text"><span class="resalt">{{ email_user }}</span>: <span class="italic">{{ asunto }}</span></p>
+
+    <h3 class="title">Productos</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="title">#</th>
+                <th scope="col" class="title">Nombre</th>
+                <th scope="col" class="title">Precio</th>
+                <th scope="col" class="title">Cantidad</th>
+                <th scope="col" class="title">Monto total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products_cart %}
+                <tr>
+                    <th scope="row" class="number">{{ product.producto_id }}</th>
+                    <td class="text">{{ product.nombre }}</td>
+                    <td class="number">{{ product.precio }}</td>
+                    <td class="number">{{ product.cantidad_vender }}</td>
+                    <td class="number">{{ product.monto_total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="number">{{ total_cart }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+</body>
+</html>

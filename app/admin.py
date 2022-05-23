@@ -1,6 +1,6 @@
 from re import search
 from django.contrib import admin
-from .models import Marca, Producto
+from .models import Marca, Talla, Producto
 
 # Register your models here.
 
@@ -10,5 +10,7 @@ class ProductoAdmin(admin.ModelAdmin):
     list_filter = ["marca", "fecha_fabricacion"]
     list_per_page = 10
 
+
 admin.site.register(Marca)
+admin.site.register(Talla)
 admin.site.register(Producto, ProductoAdmin)

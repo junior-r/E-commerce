@@ -6,18 +6,36 @@
     <link rel="stylesheet" href="{% static 'app/css/productos.css' %}">
 {% endblock %}
 {% block content %}
-    <div class="card mb-3 mt-5 card_producto border border-secondary border-3" style="perspective: 1000px;">
-        {% if producto.imagen %}
-            <img src="{{ producto.imagen.url }}" class="card-img-top" alt="imagen del producto {{ producto.nombre }}">
-        {% else %}
-            <img src="{% static 'app/imagenes/Productos/placeholder.jpg' %}" class="card-img-top" alt="imagen producto {{ producto.nombre }}">
-        {% endif %}
-        <div class="card-body text-white bg-dark">
-            <small class="text-muted">{{ producto.marca | capfirst }}</small>
-            <h5 class="card-title">{{ producto.nombre }}</h5>
-            <p class="card-text">{{ producto.descripcion }}</p>
-            <p class="card-text"><small class="text-white fw-bold fs-5">$ {{ producto.precio | intcomma }}</small></p>
-            <button type="button" class="btn btn-sm btn-primary">Agregar al Carrito</button>
+    {% if producto %}
+        <div class="product d-grid gap-3 mt-5">
+            <div class="row">
+                <div class="img_product col w-100" style="min-height: 600px">
+                    {% if producto.imagen %}
+                        <figure class="img w-100 h-100" style="background-image: url({{ producto.imagen.url }}); background-repeat: no-repeat; background-size: contain; background-position: center"></figure>
+                    {% endif %}
+                </div>
+
+                <div class="body-product col d-flex flex-column justify-content-between">
+                    <div class="info">
+                        <h2 class="title">{{ producto.nombre }}</h2>
+                        <p class="description text">{{ producto.descripcion }}</p>
+                        <p class="description text">$ {{ producto.precio }}</p>
+                    </div>
+
+                    <div class="cart pb-5">
+                        <p class="text p-3 border w-auto">Tallas disponibles:
+                            {% for talla in producto.talla.all %}
+                                <strong class="text-primary">{{ talla.talla }}</strong> |
+                            {% endfor %}
+                        </p>
+                        {% if producto_id in cart %}
+                            <a href="{% url 'del_prd_cart' producto.nombre producto.id %}" class="btn btn-outline-secondary">Quitar del carrito</a>
+                        {% else %}
+                            <a href="{% url 'add_prd_cart' producto.nombre producto.id %}" class="btn btn-outline-success">Añadir al carrito</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock content %}
