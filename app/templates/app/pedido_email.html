@@ -44,13 +44,20 @@
         tfoot {
             border-top: 3px solid #000;
         }
+
+        .fw-bold {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h1 class="title">Pedido por parte del usuario: {{ email_user }}</h1>
+    <h1 class="title">Pedido por parte del usuario: #{{ user_id }} {{ username }}</h1>
     <p class="text"><span class="resalt">{{ email_user }}</span>: <span class="italic">{{ asunto }}</span></p>
 
     <h3 class="title">Productos</h3>
+    {% if coupon %}
+        <small>Código del cupóon: {{ coupon.code }}</small>
+    {% endif %}
 
     <table class="table">
         <thead>
@@ -59,7 +66,7 @@
                 <th scope="col" class="title">Nombre</th>
                 <th scope="col" class="title">Precio</th>
                 <th scope="col" class="title">Cantidad</th>
-                <th scope="col" class="title">Monto total</th>
+                <th scope="col" class="title">Subtotal</th>
             </tr>
         </thead>
         <tbody>
@@ -79,7 +86,23 @@
                 <td></td>
                 <td></td>
                 <td></td>
-                <td class="number">{{ total_cart }}</td>
+                <td class="number">{{ subtotal }}</td>
+            </tr>
+            {% if coupon %}
+                <tr>
+                    <th scope="row"></th>
+                    <td></td>
+                    <td></td>
+                    <td class="fw-bold title">Descuento <span class="number">({{ coupon.discount }}%)</span></td>
+                    <td class="number"><span class="icon-coin-dollar text-primary"></span> {{ total_cart_coupon }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th scope="row"></th>
+                <td></td>
+                <td></td>
+                <td class="fw-bold title">Total <span class="number">(IVA 16%)</span></td>
+                <td class="number">{{ total }}</td>
             </tr>
         </tfoot>
     </table>

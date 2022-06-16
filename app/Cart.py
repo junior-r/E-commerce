@@ -20,6 +20,7 @@ class Cart:
             # Si el producto no está en el carrito, se agrega con una cantidad = 1
             self.cart[id] = {
                 'producto_id': producto.id,
+                'imagen': producto.imagen.url,
                 'nombre': producto.nombre,
                 'precio': float(producto.precio),
                 'description': producto.descripcion,

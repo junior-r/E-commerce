@@ -1,0 +1,78 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="container my-5">
+        <h1 class="title text-center">Cupónes de Descuento</h1>
+
+        {% if coupons %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Descuento</th>
+                    <th scope="col">Válido desde</th>
+                    <th scope="col">Válido hasta</th>
+                    <th scope="col">Estado</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for coupon in coupons %}
+                        <tr>
+                            <th scope="row">{{ coupon.code }}</th>
+                            <td>{{ coupon.discount }}%</td>
+                            <td>{{ coupon.valid_from }}</td>
+                            <td>{{ coupon.valid_to }}</td>
+                            <td>
+                                {% if coupon.active %}
+                                    <span class="text-primary">Activo</span>
+                                {% else %}
+                                    <span class="text-danger">Inactivo</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No tienes cupones</p>
+        {% endif %}
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Nuevo cupón <span class="icon-plus"></span>
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title title" id="exampleModalLabel">Generar cupón</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-body">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{ form | crispy }}
+
+                                    <div class="actions d-flex justify-content-between">
+                                        <a href="{% url 'productos' %}" class="btn btn-danger text-decoration-none">Cancelar</a>
+                                        <button class="btn btn-primary" type="submit">Generar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+{% endblock %}

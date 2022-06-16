@@ -1,12 +1,14 @@
+from datetime import datetime
+import random
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template.loader import render_to_string, get_template
 from django.conf import settings
 from django.contrib import messages
-from .models import Producto
+from .models import Producto, Coupon
 from django.core.paginator import Paginator
 from django.http import Http404
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CouponForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -31,7 +33,10 @@ def home(request):
 
 @login_required
 def profile(request, username):
-    user = User.objects.get(username=username)
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        raise Http404
     data = {
         'user': user
     }
@@ -91,6 +96,15 @@ def productos(request):
     except:
         raise Http404
 
+    for p in productos:
+        if p.cantidad <= 0:
+            cart = Cart(request)
+            cart.delete(producto=p)
+            p.delete()
+            return redirect('productos')
+        else:
+            pass
+
     data = {
         'entity': productos,
         'paginator': paginator
@@ -131,17 +145,37 @@ def view_producto(request, nombre, id):
 def send_pedido_cart(request, email_user, asunto):
     data = {
         'email_user': email_user,
-        'asunto': asunto
+        'asunto': asunto,
+        'username': request.user.username,
+        'user_id': request.user.id
     }
     products_cart = []
-    total_cart = 0
+    subtotal = 0
+    IVA = 0.16  # 16%
 
     for k, v in request.session['cart'].items():
         products_cart.append(v)
-        total_cart += float(v['monto_total'])
+        subtotal += float(v['monto_total'])
 
-    data['total_cart'] = total_cart
+    data['total'] = subtotal * IVA + subtotal
+    data['subtotal'] = subtotal
     data['products_cart'] = products_cart
+    code = request.session['coupon']
+
+    if code: # Si el usuario tiene un cupon.
+        try:
+            coupon = Coupon.objects.get(code=code)
+        except:
+            messages.error(request, 'Cupón no válido')
+            return redirect('cart')
+        if coupon.active:
+            data['coupon'] = coupon
+            data['total_cart_coupon'] = subtotal - (subtotal * float(coupon.discount) / 100)
+            data['total'] = data['total_cart_coupon'] * IVA + data['total_cart_coupon']
+            messages.success(request, 'Cupón aplicado correctamente!')
+            request.session['coupon'] = None
+        else:
+            messages.error(request, 'Cupón no activo!')
 
     template = get_template('app/pedido_email.html')
     content = template.render(data)
@@ -162,27 +196,82 @@ def send_pedido_cart(request, email_user, asunto):
 
 
 @login_required
+def generate_coupon(request):
+    coupons = Coupon.objects.all()
+
+    data = {
+        'form': CouponForm(),
+        'coupons': coupons
+    }
+
+    letters_upper = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    letters_lower = letters_upper.lower()
+    numbers = '0123456789'
+    code = ''
+    for i in range(0, 8):
+        code += random.choice(letters_upper + letters_lower + numbers)
+
+    if request.method == 'POST' and request.user.is_superuser:
+        form = CouponForm(request.POST)
+        if form.is_valid():
+            discount = form.cleaned_data.get('discount')
+            valid_from = form.cleaned_data.get('valid_from')
+            valid_to = form.cleaned_data.get('valid_to')
+            active = form.cleaned_data.get('active')
+
+            coupon = Coupon(code=code, discount=discount, valid_from=valid_from, valid_to=valid_to, active=active)
+            coupon.save()
+            messages.success(request, 'Cupón creado correctamente!')
+            return redirect(to='generate_coupon')
+        else:
+            data['form'] = form
+            messages.error(request, 'Ocurrió un error, ¡vuelva a intentar!')
+
+    return render(request, 'app/coupons.html', data)
+
+
+@login_required
 def cart(request):
+    global producto
     data = {
         'cart': request.session['cart']
     }
 
-    if request.user.is_authenticated and 'cart' in request.session.keys():
-        productos = []
-        total_cart = 0
-        cart = request.session['cart']
-        count = 0
+    productos = []
+    subtotal = 0
+    IVA = 0.16  # 16%
+    cart = request.session['cart']
+    count = 0
 
-        for k, v in cart.items():
-            producto = Producto.objects.get(id=int(k))
-            productos.append(producto)
-            count += 1
+    for k, v in cart.items():
+        producto = Producto.objects.get(id=int(k))
+        productos.append(producto)
+        count += 1
 
-            total_cart += float(v['monto_total'])
+        subtotal += float(v['monto_total'])
 
-        data['number_prd_cart'] = count
-        data['productos'] = productos
-        data['total_cart'] = total_cart
+    data['total'] = subtotal * IVA + subtotal
+    data['number_prd_cart'] = count
+    data['productos'] = productos
+    data['total_cart'] = subtotal
+
+    if request.method == 'GET':
+        code = request.GET.get('coupon')
+
+        if code:
+            try:
+                coupon = Coupon.objects.get(code=code)
+                request.session['coupon'] = code
+            except:
+                messages.error(request, 'Cupón no válido')
+                return redirect('cart')
+            if coupon.active:
+                data['coupon'] = coupon
+                data['total_cart_coupon'] = subtotal - (subtotal * float(coupon.discount) / 100)
+                data['total'] = data['total_cart_coupon'] * IVA + data['total_cart_coupon']
+                messages.success(request, 'Cupón aplicado correctamente!')
+            else:
+                messages.error(request, 'Cupón no activo!')
 
     if request.method == 'POST':
         email_user = request.POST.get('email_user')
@@ -227,3 +316,10 @@ def del_prd_cart(request, id, nombre):
     cart.delete(producto)
 
     return redirect('view_producto', nombre=producto.nombre,  id=producto.id)
+
+
+@login_required
+def clean_cart(request):
+    cart = Cart(request)
+    cart.clean()
+    return redirect('cart')
